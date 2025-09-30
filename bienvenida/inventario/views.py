@@ -3,10 +3,44 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_POST
-from .models import Producto
-from .forms import ProductoForm
+from .models import Producto, Cliente, Venta
+from .forms import ProductoForm, ClienteForm, VentaForm
 
 # Create your views here.
+
+# Vista para registrar cliente
+@csrf_protect
+def cliente_create(request):
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            cliente = form.save()
+            messages.success(request, f'Cliente {cliente.rut} registrado exitosamente')
+            return redirect('producto_list')
+        else:
+            messages.error(request, 'Por favor corrige los errores en el formulario')
+    else:
+        form = ClienteForm()
+    return render(request, 'inventario/cliente_form.html', {'form': form})
+
+
+# Vista para registrar venta
+@csrf_protect
+def venta_create(request):
+    if request.method == 'POST':
+        form = VentaForm(request.POST)
+        if form.is_valid():
+            venta = form.save()
+            # Actualizar stock del producto
+            venta.producto.stock -= venta.cantidad
+            venta.producto.save()
+            messages.success(request, 'Venta registrada exitosamente')
+            return redirect('producto_list')
+        else:
+            messages.error(request, 'Por favor corrige los errores en el formulario')
+    else:
+        form = VentaForm()
+    return render(request, 'inventario/venta_form.html', {'form': form})
 
 # READ (List)
 def producto_list(request):

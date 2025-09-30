@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-xl mx-auto bg-white rounded-lg shadow p-6 mt-8">
+    <h2 class="text-2xl font-bold mb-4">Detalle del Producto</h2>
+    <div class="mb-2"><span class="font-semibold">Nombre:</span> {{ object.nombre }}</div>
+    <div class="mb-2"><span class="font-semibold">Descripción:</span> {{ object.descripcion }}</div>
+    <div class="mb-2"><span class="font-semibold">Precio:</span> ${{ object.precio }}</div>
+    <div class="mb-2"><span class="font-semibold">Stock:</span> {{ object.stock }}</div>
+    <div class="flex gap-2 mt-4">
+        <a href="{% url 'producto_update' object.pk %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Editar</a>
+        <a href="{% url 'producto_delete' object.pk %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Eliminar</a>
+        <a href="{% url 'producto_list' %}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">Volver</a>
+    </div>
+</div>
+{% endblock %}

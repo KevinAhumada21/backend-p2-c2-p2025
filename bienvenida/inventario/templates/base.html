@@ -1,32 +1,30 @@
 <head>
     <title>
-        {% block title %}
-
-        {% endblock %}
+        {% block title %}Control de Ventas{% endblock %}
     </title>
-    <scripts src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></scripts>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
-<body>
-    <header>
-        {% block header %}
-
-        {% endblock %}
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-blue-700 text-white py-4 shadow">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <h1 class="text-2xl font-bold">Control de Ventas</h1>
+            <nav>
+                <ul class="flex gap-4">
+                    <li><a href="{% url 'producto_list' %}" class="hover:underline">Productos</a></li>
+                    <li><a href="{% url 'producto_create' %}" class="hover:underline">Agregar Producto</a></li>
+                    <li><a href="{% url 'cliente_create' %}" class="hover:underline">Registrar Cliente</a></li>
+                    <li><a href="{% url 'venta_create' %}" class="hover:underline">Registrar Venta</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <hr />
-    <nav>
-        {% block breadcrumb %}
-
-        {% endblock %}
-    </nav>
-    <main>
+    <main class="container mx-auto px-4 py-8">
         {% block content %}
-
         {% endblock %}
     </main>
-    <footer>
+    <footer class="bg-gray-200 text-center py-4 mt-8 text-gray-600">
         {% block footer %}
-
+        &copy; Control de Ventas - Kevin Merino
         {% endblock %}
     </footer>
 </body>

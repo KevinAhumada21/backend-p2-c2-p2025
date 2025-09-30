@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-xl mx-auto bg-white rounded-lg shadow p-6 mt-8">
+    <h2 class="text-2xl font-bold mb-4">Registrar Cliente</h2>
+    <form method="post" class="space-y-4">{% csrf_token %}
+        {{ form.non_field_errors }}
+        <div>
+            <label class="block font-semibold">RUT</label>
+            {{ form.rut|as_widget:attrs }}
+            {{ form.rut.errors }}
+        </div>
+        <div>
+            <label class="block font-semibold">Nombre</label>
+            {{ form.nombre|as_widget:attrs }}
+            {{ form.nombre.errors }}
+        </div>
+        <div>
+            <label class="block font-semibold">Email</label>
+            {{ form.email|as_widget:attrs }}
+            {{ form.email.errors }}
+        </div>
+        <div>
+            <label class="inline-flex items-center">
+                {{ form.habitual }}
+                <span class="ml-2">Cliente habitual</span>
+            </label>
+            {{ form.habitual.errors }}
+        </div>
+        <div class="flex gap-2 mt-4">
+            <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Guardar</button>
+            <a href="{% url 'producto_list' %}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+{% with attrs='class:form-input w-full border border-gray-300 rounded px-3 py-2' %}{% endwith %}
