@@ -56,7 +56,7 @@ ROOT_URLCONF = 'bienvenida.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+    'DIRS': [BASE_DIR / 'bienvenida' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,7 +119,17 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Usar el modelo personalizado de usuario Cliente
+AUTH_USER_MODEL = 'inventario.Cliente'
+
+# Backend personalizado para login con RUT
+AUTHENTICATION_BACKENDS = [
+    'inventario.auth_backends.ClienteRUTBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]

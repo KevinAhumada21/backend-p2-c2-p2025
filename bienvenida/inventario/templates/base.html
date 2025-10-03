@@ -9,12 +9,14 @@
         <div class="container mx-auto flex justify-between items-center px-4">
             <h1 class="text-2xl font-bold">Control de Ventas</h1>
             <nav>
+                {% if user.is_authenticated %}
                 <ul class="flex gap-4">
                     <li><a href="{% url 'producto_list' %}" class="hover:underline">Productos</a></li>
+                    {% if user.is_staff %}
                     <li><a href="{% url 'producto_create' %}" class="hover:underline">Agregar Producto</a></li>
-                    <li><a href="{% url 'cliente_create' %}" class="hover:underline">Registrar Cliente</a></li>
-                    <li><a href="{% url 'venta_create' %}" class="hover:underline">Registrar Venta</a></li>
+                    {% endif %}
                 </ul>
+                {% endif %}
             </nav>
         </div>
     </header>
@@ -24,7 +26,7 @@
     </main>
     <footer class="bg-gray-200 text-center py-4 mt-8 text-gray-600">
         {% block footer %}
-        &copy; Control de Ventas - Kevin Merino
+         Control de Ventas - Kevin Merino
         {% endblock %}
     </footer>
 </body>
