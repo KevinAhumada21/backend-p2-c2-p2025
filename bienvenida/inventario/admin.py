@@ -11,7 +11,7 @@ class ProductoAdmin(admin.ModelAdmin):
     ordering = ('-fecha_creacion',)
     readonly_fields = ('fecha_creacion', 'fecha_actualizacion')
     fieldsets = (
-        ('Información Básica', {
+        ('Información', {
             'fields': ('nombre', 'descripcion')
         }),
         ('Precio y Stock', {
